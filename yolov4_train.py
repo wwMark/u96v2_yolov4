@@ -22,7 +22,8 @@ for example in mnist_train.as_numpy_iterator():
     images_array = np.append(images_array, image_data_array, axis=0)
 
 loss_fn = tf.keras.losses.MeanSquaredError()
-model.compile(optimizer='adam', loss=loss_fn, metrics=['accuracy'])
+opt = tf.keras.optimizers.Adam(learning_rate=0.001 ** 4)
+model.compile(optimizer=opt, loss=loss_fn, metrics=['accuracy'])
 print(model.summary())
 model.fit(x=images_array, y=np.random.randint(0, 2, (1, 1, 80)), epochs=1)
 model.save(pretrained_model_path)
